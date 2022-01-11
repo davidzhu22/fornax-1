@@ -53,6 +53,7 @@ pushd /root/go/src/github.com
 git clone https://github.com/CentaurusInfra/fornax.git
          mv fornax kubeedge
          pushd /root/go/src/github.com/kubeedge
+	 #echo yes | scp -r $a:/etc/kubernetes/admin.conf /root/go/src/github.com/kubeedge
          make all
          make WHAT=cloudcore
          make WHAT=edgecore
@@ -81,7 +82,7 @@ git clone https://github.com/CentaurusInfra/fornax.git
          kubectl apply -f build/crds/edgecluster/edgecluster_v1.yaml
 	 export KUBECONFIG=/etc/kubernetes/admin.conf
          nohup _output/local/bin/cloudcore > cloudcore.logs 2>&1 & 
-	 echo yes | scp -r /etc/kubernetes/admin.conf $b:/root/go/src/github.com/kubeedge
+	 #echo yes | scp -r /etc/kubernetes/admin.conf $b:/root/go/src/github.com/kubeedge
          echo yes | scp -r /etc/kubeedge/certs  $b:/etc/kubeedge
          echo yes | scp -r /etc/kubeedge/ca $b:/etc/kubeedge
          echo yes | scp -r /etc/kubeedge/certs $c:/etc/kubeedge
