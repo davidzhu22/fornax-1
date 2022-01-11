@@ -12,7 +12,7 @@ do
 sshpass -p ROOT#123 ssh-copy-id root@192.168.2.51 root@192.168.2.52
 done
 ------------------------------------------
-
+pushd /root
 sudo bash /root/sshscript.sh      
 hostnamectl set-hostname node-a
 ufw disable
@@ -76,10 +76,8 @@ git clone https://github.com/CentaurusInfra/fornax.git
          #ssh -t root@$i "scp -r /etc/kubernetes/admin.conf root@$2:/root/go/src/github.com/kubeedge"
          kubectl apply -f build/crds/devices/devices_v1alpha2_device.yaml
          kubectl apply -f build/crds/devices/devices_v1alpha2_devicemodel.yaml
-
          kubectl apply -f build/crds/reliablesyncs/cluster_objectsync_v1alpha1.yaml
          kubectl apply -f build/crds/reliablesyncs/objectsync_v1alpha1.yaml
-
          kubectl apply -f  build/crds/router/router_v1_rule.yaml
          kubectl apply -f  build/crds/router/router_v1_ruleEndpoint.yaml
          kubectl apply -f build/crds/edgecluster/mission_v1.yaml
@@ -91,9 +89,12 @@ git clone https://github.com/CentaurusInfra/fornax.git
          echo yes | scp -r /etc/kubeedge/ca 192.168.2.51:/etc/kubeedge
 	 echo yes | scp -r /etc/kubeedge/certs 192.168.2.52:/etc/kubeedge
          echo yes | scp -r /etc/kubeedge/ca 192.168.2.52:/etc/kubeedge
-	 scp -r /root/Scripts/fornax2.sh 192.168.2.51:/root
-	 scp -r /root/Scripts/fornax3.sh 192.168.2.52:/root
+	# scp -r /root/Scripts/fornax2.sh 192.168.2.51:/root
+	# scp -r /root/Scripts/fornax3.sh 192.168.2.52:/root
 	 cat cloudcore.logs
+	 pushd /root
+	 sudo bash Scripts/fornax2.sh 192.168.2.51
+	 sudo bash Scripts/fornax3.sh 192.168.2.52
 
 
 
