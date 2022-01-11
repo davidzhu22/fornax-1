@@ -5,7 +5,7 @@
 
 set -x
 
-export c=192.168.2.52
+export a=192.168.2.50
 
 pushd /root
 hostnamectl set-hostname node-b
@@ -52,6 +52,7 @@ pushd /root/go/src/github.com
 git clone https://github.com/CentaurusInfra/fornax.git
          mv fornax kubeedge
          pushd /root/go/src/github.com/kubeedge
+	 echo yes | scp -r $a:/etc/kubernetes/admin.conf /root/go/src/github.com/kubeedge
          make all
          make WHAT=cloudcore
          make WHAT=edgecore
@@ -75,7 +76,7 @@ git clone https://github.com/CentaurusInfra/fornax.git
          nohup _output/local/bin/edgecore --edgecluster > edgecore.logs 2>&1 &
          export KUBECONFIG=/etc/kubernetes/admin.conf
          nohup _output/local/bin/cloudcore > cloudcore.logs 2>&1 &
-         echo yes | scp -r /etc/kubernetes/admin.conf  $c:/root/go/src/github.com/kubeedge
+         #echo yes | scp -r /etc/kubernetes/admin.conf  $c:/root/go/src/github.com/kubeedge
          sleep 5s
          cat cloudcore.logs
          cat edgecore.logs
