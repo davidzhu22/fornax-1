@@ -90,10 +90,11 @@ git clone https://github.com/CentaurusInfra/fornax.git
          scp -r /root/Scripts/fornax2.sh $b:/root
          scp -r /root/Scripts/fornax3.sh $c:/root
 	 cat cloudcore.logs
+pushd /root
+ssh -t root@$b "sudo bash fornax2.sh"
+ssh -t root@$c  "sudo bash fornax3.sh"
 
-#pushd /root/Scripts
-#sudo bash fornax2.sh root@$b
-#sudo bash fornax3.sh root@$c
+
 
 		 
 
