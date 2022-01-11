@@ -10,7 +10,7 @@ export b=192.168.2.51
 export c=192.168.2.52
 
 scp -r /root/fornaxscript/fornax2.sh $b:/root
-scp -r /root/fornaxscript/fornax3.sh $c:/root
+#scp -r /root/fornaxscript/fornax3.sh $c:/root
 pushd /root  
 hostnamectl set-hostname node-a
 ufw disable
