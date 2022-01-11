@@ -88,9 +88,9 @@ git clone https://github.com/CentaurusInfra/fornax.git
 	 ssh -t root@$b "mkdir -p /etc/kubeedge"
          echo yes | scp -r /etc/kubeedge/certs  $b:/etc/kubeedge
          echo yes | scp -r /etc/kubeedge/ca $b:/etc/kubeedge
-	 ssh -t root@$c "mkdir -p /etc/kubeedge"
-         echo yes | scp -r /etc/kubeedge/certs $c:/etc/kubeedge
-         echo yes | scp -r /etc/kubeedge/ca $c:/etc/kubeedge
+	 #ssh -t root@$c "mkdir -p /etc/kubeedge"
+         #echo yes | scp -r /etc/kubeedge/certs $c:/etc/kubeedge
+         #echo yes | scp -r /etc/kubeedge/ca $c:/etc/kubeedge
          #scp -r /root/fornaxscript/fornax2.sh $b:/root
          #scp -r /root/fornaxscript/fornax3.sh $c:/root
 	 cat cloudcore.logs
