@@ -84,16 +84,16 @@ git clone https://github.com/CentaurusInfra/fornax.git
          kubectl apply -f  build/crds/router/router_v1_ruleEndpoint.yaml
          kubectl apply -f build/crds/edgecluster/mission_v1.yaml
          kubectl apply -f build/crds/edgecluster/edgecluster_v1.yaml
-		 export KUBECONFIG=/etc/kubernetes/admin.conf
+	 export KUBECONFIG=/etc/kubernetes/admin.conf
          nohup _output/local/bin/cloudcore > cloudcore.logs 2>&1 & 
-		 echo yes | scp -r /etc/kubernetes/admin.conf 192.168.2.51:/root/go/src/github.com/kubeedge
-		 echo yes | scp -r /etc/kubeedge/certs  192.168.2.51:/etc/kubeedge
+	 echo yes | scp -r /etc/kubernetes/admin.conf 192.168.2.51:/root/go/src/github.com/kubeedge
+	 echo yes | scp -r /etc/kubeedge/certs  192.168.2.51:/etc/kubeedge
          echo yes | scp -r /etc/kubeedge/ca 192.168.2.51:/etc/kubeedge
-		 echo yes | scp -r /etc/kubeedge/certs 192.168.2.52:/etc/kubeedge
+	 echo yes | scp -r /etc/kubeedge/certs 192.168.2.52:/etc/kubeedge
          echo yes | scp -r /etc/kubeedge/ca 192.168.2.52:/etc/kubeedge
-		 scp -r /root/fornax2.sh 192.168.2.51:/root
-		 scp -r /root/fornax3.sh 192.168.2.52:/root
-		 cat cloudcore.logs
+	 scp -r /root/Scripts/fornax2.sh 192.168.2.51:/root
+	 scp -r /root/Scripts/fornax3.sh 192.168.2.52:/root
+	 cat cloudcore.logs
 
 
 
