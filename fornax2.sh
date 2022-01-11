@@ -56,27 +56,25 @@ git clone https://github.com/CentaurusInfra/fornax.git
          mkdir /etc/kubeedge/config -p
          cp /etc/kubernetes/admin.conf /root/.kube/config
          _output/local/bin/cloudcore --minconfig > /etc/kubeedge/config/cloudcore.yaml
-		     cp /etc/kubernetes/admin.conf /root/edgecluster.kubeconfig
+         cp /etc/kubernetes/admin.conf /root/edgecluster.kubeconfig
          _output/local/bin/edgecore --edgeclusterconfig > /etc/kubeedge/config/edgecore.yaml
          tests/edgecluster/hack/update_edgecore_config.sh admin.conf
-		     sed -i 's+RANDFILE+#RANDFILE+g' /etc/ssl/openssl.cnf
-		     kubectl apply -f build/crds/devices/devices_v1alpha2_device.yaml
+         sed -i 's+RANDFILE+#RANDFILE+g' /etc/ssl/openssl.cnf
+         kubectl apply -f build/crds/devices/devices_v1alpha2_device.yaml
          kubectl apply -f build/crds/devices/devices_v1alpha2_devicemodel.yaml
-
          kubectl apply -f build/crds/reliablesyncs/cluster_objectsync_v1alpha1.yaml
          kubectl apply -f build/crds/reliablesyncs/objectsync_v1alpha1.yaml
-
          kubectl apply -f  build/crds/router/router_v1_rule.yaml
          kubectl apply -f  build/crds/router/router_v1_ruleEndpoint.yaml
          kubectl apply -f build/crds/edgecluster/mission_v1.yaml
          kubectl apply -f build/crds/edgecluster/edgecluster_v1.yaml
-		     chmod 777 /root/go/src/github.com/kubeedge/_output/local/bin/kubectl/vanilla/kubectl
-		     export KUBECONFIG=/etc/kubernetes/admin.conf
-		     nohup _output/local/bin/edgecore --edgecluster > edgecore.logs 2>&1 &
- 		     export KUBECONFIG=/etc/kubernetes/admin.conf
+         chmod 777 /root/go/src/github.com/kubeedge/_output/local/bin/kubectl/vanilla/kubectl
+         export KUBECONFIG=/etc/kubernetes/admin.conf
+         nohup _output/local/bin/edgecore --edgecluster > edgecore.logs 2>&1 &
+         export KUBECONFIG=/etc/kubernetes/admin.conf
          nohup _output/local/bin/cloudcore > cloudcore.logs 2>&1 &
-		     echo yes | scp -r /etc/kubernetes/admin.conf  192.168.2.52:/root/go/src/github.com/kubeedge
-		     sleep 5s
-		     cat cloudcore.logs
-		     cat edgecore.logs
+         echo yes | scp -r /etc/kubernetes/admin.conf  192.168.2.52:/root/go/src/github.com/kubeedge
+         sleep 5s
+         cat cloudcore.logs
+         cat edgecore.logs
 		 
