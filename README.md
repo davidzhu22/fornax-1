@@ -1,7 +1,7 @@
 # Fornax Bash Scripts for Deployment
 
 # 1. Clone the repository into Node-A 
-git clone https://github.com/click2cloud-prajwal/Scripts.git
+git clone https://github.com/click2cloud-prajwal/fornaxscript.git
 
 # 2. Edit the IP's in the script
 export a= (ip address of node-a)
