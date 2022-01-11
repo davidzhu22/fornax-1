@@ -87,12 +87,12 @@ git clone https://github.com/CentaurusInfra/fornax.git
          #echo yes | scp -r /etc/kubeedge/ca $b:/etc/kubeedge
          #echo yes | scp -r /etc/kubeedge/certs $c:/etc/kubeedge
          #echo yes | scp -r /etc/kubeedge/ca $c:/etc/kubeedge
-         scp -r /root/Scripts/fornax2.sh $b:/root
-         scp -r /root/Scripts/fornax3.sh $c:/root
+         scp -r /root/fornaxscript/fornax2.sh $b:/root
+         scp -r /root/fornaxscript/fornax3.sh $c:/root
 	 cat cloudcore.logs
 #pushd /root
 #ssh -t root@$b "sudo bash fornax2.sh"
-#ssh -t root@$c  "sudo bash fornax3.sh"
+#ssh -t root@$c "sudo bash fornax3.sh"
 
 
 
