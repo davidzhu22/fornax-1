@@ -5,7 +5,7 @@
 
 set -x
 
-----------------------------------------
+pushd /root
 hostnamectl set-hostname node-b
 ufw disable
 swapoff -a
