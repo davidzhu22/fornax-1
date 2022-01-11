@@ -5,15 +5,12 @@
 
 set -x
 
-echo y | apt-get install sshpass
-for i in $@
-do
-< /dev/zero ssh-keygen -q -N ""
-sshpass -p ROOT#123 ssh-copy-id root@192.168.2.51 root@192.168.2.52
-done
-------------------------------------------
-pushd /root
-sudo bash /root/sshscript.sh      
+export a=192.168.2.50
+export b=192.168.2.51
+export c=192.168.2.52
+
+ 
+pushd /root  
 hostnamectl set-hostname node-a
 ufw disable
 swapoff -a
@@ -65,8 +62,8 @@ git clone https://github.com/CentaurusInfra/fornax.git
 	     sed -i 's+RANDFILE+#RANDFILE+g' /etc/ssl/openssl.cnf
          mkdir -p /etc/kubeedge/ca
          mkdir -p /etc/kubeedge/certs
-         build/tools/certgen.sh genCA 192.168.2.50 192.168.2.51 192.168.2.52
-         build/tools/certgen.sh genCertAndKey server 192.168.2.50 192.168.2.51 192.168.2.52
+         build/tools/certgen.sh genCA $a $b $c
+         build/tools/certgen.sh genCertAndKey server $a $b $c
          #ssh -t root@$2 "mkdir -p /etc/kubeedge/ca /etc/kubeedge/certs"
          #ssh  -t root@$3 "mkdir -p /etc/kubeedge/ca /etc/kubeedge/certs"
          #ssh -t root@$i "scp -r /etc/kubeedge/ca root@$2:/etc/kubeedge/"
@@ -84,18 +81,20 @@ git clone https://github.com/CentaurusInfra/fornax.git
          kubectl apply -f build/crds/edgecluster/edgecluster_v1.yaml
 	 export KUBECONFIG=/etc/kubernetes/admin.conf
          nohup _output/local/bin/cloudcore > cloudcore.logs 2>&1 & 
-	 echo yes | scp -r /etc/kubernetes/admin.conf 192.168.2.51:/root/go/src/github.com/kubeedge
-	 echo yes | scp -r /etc/kubeedge/certs  192.168.2.51:/etc/kubeedge
-         echo yes | scp -r /etc/kubeedge/ca 192.168.2.51:/etc/kubeedge
-	 echo yes | scp -r /etc/kubeedge/certs 192.168.2.52:/etc/kubeedge
-         echo yes | scp -r /etc/kubeedge/ca 192.168.2.52:/etc/kubeedge
-	# scp -r /root/Scripts/fornax2.sh 192.168.2.51:/root
-	# scp -r /root/Scripts/fornax3.sh 192.168.2.52:/root
+	 echo yes | scp -r /etc/kubernetes/admin.conf $b:/root/go/src/github.com/kubeedge
+         echo yes | scp -r /etc/kubeedge/certs  $b:/etc/kubeedge
+         echo yes | scp -r /etc/kubeedge/ca $b:/etc/kubeedge
+         echo yes | scp -r /etc/kubeedge/certs $c:/etc/kubeedge
+         echo yes | scp -r /etc/kubeedge/ca $c:/etc/kubeedge
+         scp -r /root/Scripts/fornax2.sh $b:/root
+         scp -r /root/Scripts/fornax3.sh $c:/root
 	 cat cloudcore.logs
-	 pushd /root
-	 sudo bash Scripts/fornax2.sh 192.168.2.51
-	 sleep 120s
-	 sudo bash Scripts/fornax3.sh 192.168.2.52
+
+pushd /root/Scripts
+sudo bash fornax2.sh root@$b
+sudo bash fornax3.sh root@$c
+
+		 
 
 
 
