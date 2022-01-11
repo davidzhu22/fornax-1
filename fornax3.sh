@@ -6,7 +6,7 @@
 set -x
 
 
-      
+pushd /root   
 hostnamectl set-hostname node-c
 ufw disable
 swapoff -a
