@@ -9,7 +9,8 @@ export a=192.168.2.50
 export b=192.168.2.51
 export c=192.168.2.52
 
- 
+scp -r /root/fornaxscript/fornax2.sh $b:/root
+scp -r /root/fornaxscript/fornax3.sh $c:/root
 pushd /root  
 hostnamectl set-hostname node-a
 ufw disable
@@ -87,8 +88,8 @@ git clone https://github.com/CentaurusInfra/fornax.git
          #echo yes | scp -r /etc/kubeedge/ca $b:/etc/kubeedge
          #echo yes | scp -r /etc/kubeedge/certs $c:/etc/kubeedge
          #echo yes | scp -r /etc/kubeedge/ca $c:/etc/kubeedge
-         scp -r /root/fornaxscript/fornax2.sh $b:/root
-         scp -r /root/fornaxscript/fornax3.sh $c:/root
+         #scp -r /root/fornaxscript/fornax2.sh $b:/root
+         #scp -r /root/fornaxscript/fornax3.sh $c:/root
 	 cat cloudcore.logs
 #pushd /root
 #ssh -t root@$b "sudo bash fornax2.sh"
