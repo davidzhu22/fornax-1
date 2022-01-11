@@ -13,8 +13,6 @@ ufw disable
 swapoff -a
 mkdir -p /etc/kubeedge/ca
 mkdir -p /etc/kubeedge/certs
-echo yes | scp -r $a:/etc/kubeedge/certs /etc/kubeedge
-echo yes | scp -r $a:/etc/kubeedge/ca  /etc/kubeedge
 apt-get -y update
 echo -e 'br_netfilter' | cat > /etc/modules-load.d/k8s.conf
 echo -e 'net.bridge.bridge-nf-call-ip6tables = 1\nnet.bridge.bridge-nf-call-iptables = 1' | cat >> /etc/sysctl.d/k8s.conf
@@ -54,6 +52,8 @@ pushd /root/go/src/github.com
 git clone https://github.com/CentaurusInfra/fornax.git
          mv fornax kubeedge
          pushd /root/go/src/github.com/kubeedge
+	 echo yes | scp -r $a:/etc/kubeedge/certs /etc/kubeedge
+         echo yes | scp -r $a:/etc/kubeedge/ca  /etc/kubeedge
 	 echo yes | scp -r $a:/etc/kubernetes/admin.conf /root/go/src/github.com/kubeedge
          make all
          make WHAT=cloudcore
