@@ -94,6 +94,7 @@ git clone https://github.com/CentaurusInfra/fornax.git
 	 cat cloudcore.logs
 	 pushd /root
 	 sudo bash Scripts/fornax2.sh 192.168.2.51
+	 sleep 120s
 	 sudo bash Scripts/fornax3.sh 192.168.2.52
 
 
