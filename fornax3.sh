@@ -5,6 +5,7 @@
 
 set -x
 
+export a=192.168.2.50
 export b=192.168.2.51
 
 pushd /root   
@@ -13,6 +14,8 @@ ufw disable
 swapoff -a
 mkdir -p /etc/kubeedge/ca
 mkdir -p /etc/kubeedge/certs
+echo yes | scp -r $a:/etc/kubeedge/certs  /etc/kubeedge
+echo yes | scp -r $a:/etc/kubeedge/ca  /etc/kubeedge
 apt-get -y update
 echo -e 'br_netfilter' | cat > /etc/modules-load.d/k8s.conf
 echo -e 'net.bridge.bridge-nf-call-ip6tables = 1\nnet.bridge.bridge-nf-call-iptables = 1' | cat >> /etc/sysctl.d/k8s.conf
