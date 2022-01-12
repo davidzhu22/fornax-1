@@ -1,4 +1,4 @@
-# Fornax Bash Scripts for Deployment (On-Premise)
+# Fornax Bash Scripts for Automating the Deployment (On-Premise)
 
 ### 1. Generate ssh key in Node-B and copy ssh key ID to Node-A & Node-C:
        ssh-keygen -t rsa
