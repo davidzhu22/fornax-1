@@ -1,1 +1,1 @@
-# Fornax Script
+# Fornax Bash Scripts
