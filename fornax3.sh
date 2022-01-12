@@ -57,6 +57,7 @@ git clone https://github.com/CentaurusInfra/fornax.git
 	 #echo yes | scp -r $b:/etc/kubeedge/certs  /etc/kubeedge
          #echo yes | scp -r $b:/etc/kubeedge/ca  /etc/kubeedge
 	 #echo yes | scp -r $b:/etc/kubernetes/admin.conf /root/go/src/github.com/kubeedge
+	 cp /root/admin.conf /root/go/src/github.com/kubeedge
          make all
          make WHAT=edgecore
          mkdir /etc/kubeedge/config -p
