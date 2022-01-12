@@ -93,6 +93,7 @@ git clone https://github.com/CentaurusInfra/fornax.git
          #echo yes | scp -r /etc/kubeedge/ca $c:/etc/kubeedge
          #scp -r /root/fornaxscript/fornax2.sh $b:/root
          #scp -r /root/fornaxscript/fornax3.sh $c:/root
+	 sleep 5s
 	 cat cloudcore.logs
 #pushd /root
 #ssh -t root@$b "sudo bash fornax2.sh"
