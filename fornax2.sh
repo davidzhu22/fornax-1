@@ -5,7 +5,7 @@
 
 set -x
 
-export c=192.168.2.52
+export a=192.168.2.50
 
 pushd /root
 hostnamectl set-hostname node-b
