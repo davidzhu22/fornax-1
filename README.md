@@ -4,9 +4,9 @@
 git clone https://github.com/click2cloud-prajwal/fornaxscript.git
 
 ### 2. Edit the IP's in all the Three scripts:
-#### export a= <IP address of node-a>
-#### export b= <IP address of node-b>
-#### export c= <IP address of node-c>
+#### export a= (IP address of node-a)
+#### export b= (IP address of node-b)
+#### export c= (IP address of node-c)
 
 ### 3. Run the Script:
 #### sudo bash fornaxscript/fornax1.sh 
