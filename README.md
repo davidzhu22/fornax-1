@@ -6,7 +6,7 @@
        ssh-copy-id (node-c IP)
 
 ### 2. Clone the repository into Node-A, Node-B, Node-C
-       git clone https://github.com/click2cloud-prajwal/fornaxscript.git
+       git clone https://github.com/click2cloud-prajwal/fornaxscript.git -b test
 
 ### 3. Edit the IP's in all the three scripts:
 #####   export a= (IP address of node-a)
