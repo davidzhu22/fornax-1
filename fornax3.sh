@@ -48,7 +48,7 @@ sleep 10s
 cp /usr/local/go/bin/go  /usr/local/bin
 source /root/.bashrc
 go version
-#mkdir -p go/src/github.com
+mkdir -p go/src/github.com
 pushd /root/go/src/github.com
 git clone https://github.com/CentaurusInfra/fornax.git
          mv fornax kubeedge
