@@ -5,9 +5,9 @@
 
 set -x
 
-export a=192.168.2.50
-export b=192.168.2.51
-export c=192.168.2.52
+export a=
+export b=
+export c=
 
 pushd /root
 hostnamectl set-hostname node-b
