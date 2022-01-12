@@ -5,7 +5,6 @@
 
 set -x
 
-export a=192.168.2.50
 export b=192.168.2.51
 
 pushd /root   
@@ -53,8 +52,8 @@ pushd /root/go/src/github.com
 git clone https://github.com/CentaurusInfra/fornax.git
          mv fornax kubeedge
          pushd /root/go/src/github.com/kubeedge
-	 echo yes | scp -r $a:/etc/kubeedge/certs  /etc/kubeedge
-         echo yes | scp -r $a:/etc/kubeedge/ca  /etc/kubeedge
+	 echo yes | scp -r $b:/etc/kubeedge/certs  /etc/kubeedge
+         echo yes | scp -r $b:/etc/kubeedge/ca  /etc/kubeedge
 	 echo yes | scp -r $b:/etc/kubernetes/admin.conf /root/go/src/github.com/kubeedge
          make all
          make WHAT=edgecore
