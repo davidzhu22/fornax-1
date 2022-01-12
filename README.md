@@ -15,7 +15,7 @@
   
 ### 4. Verify the Edgecluster in Node-A:
        kubectl get edgecluster
-### 5. To see cloudcore & edgecore logs:
+### 5. To see Cloudcore & Edgecore logs:
        cd /root/go/src/github.com/kubeedge
        cat cloudcore.logs
        cat edgecore.logs
