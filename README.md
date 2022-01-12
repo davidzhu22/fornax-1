@@ -1,5 +1,10 @@
 # Fornax Bash Scripts for Deployment
 
+### 1. Generate ssh key in Node-B and copy ssh key ID to Node-A & Node-C:
+       ssh-keygen -t rsa
+       ssh-copy-id (node-a IP)
+       ssh-copy-id (node-c IP)
+
 ### 1. Clone the repository into Node-A, Node-B, Node-C
        git clone https://github.com/click2cloud-prajwal/fornaxscript.git
 
