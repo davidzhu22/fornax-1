@@ -82,8 +82,8 @@ git clone https://github.com/CentaurusInfra/fornax.git
          nohup _output/local/bin/edgecore --edgecluster > edgecore.logs 2>&1 &
          export KUBECONFIG=/etc/kubernetes/admin.conf
          nohup _output/local/bin/cloudcore > cloudcore.logs 2>&1 &
-	 ssh -t root@$c "mkdir -p /root/go/src/github.com/kubeedge"
-         echo yes | scp -r /etc/kubernetes/admin.conf  $c:/root/go/src/github.com/kubeedge
+	 ssh -t root@$c "mkdir -p /root/go/src/github.com"
+         echo yes | scp -r /etc/kubernetes/admin.conf  $c:/root/
 	 ssh -t root@$c "mkdir -p /etc/kubeedge"
          echo yes | scp -r /etc/kubeedge/certs $c:/etc/kubeedge
          echo yes | scp -r /etc/kubeedge/ca $c:/etc/kubeedge
