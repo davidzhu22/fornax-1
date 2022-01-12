@@ -3,7 +3,7 @@
 ### 1. Clone the repository into Node-A, Node-B, Node-C
        git clone https://github.com/click2cloud-prajwal/fornaxscript.git
 
-### 2. Edit the IP's in all the Three scripts:
+### 2. Edit the IP's in all the three scripts:
 #####   export a= (IP address of node-a)
 #####   export b= (IP address of node-b)
 #####   export c= (IP address of node-c)
