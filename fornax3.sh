@@ -12,8 +12,8 @@ pushd /root
 hostnamectl set-hostname node-c
 ufw disable
 swapoff -a
-mkdir -p /etc/kubeedge/ca
-mkdir -p /etc/kubeedge/certs
+#mkdir -p /etc/kubeedge/ca
+#mkdir -p /etc/kubeedge/certs
 apt-get -y update
 echo -e 'br_netfilter' | cat > /etc/modules-load.d/k8s.conf
 echo -e 'net.bridge.bridge-nf-call-ip6tables = 1\nnet.bridge.bridge-nf-call-iptables = 1' | cat >> /etc/sysctl.d/k8s.conf
