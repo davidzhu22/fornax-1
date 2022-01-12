@@ -9,9 +9,9 @@
        git clone https://github.com/click2cloud-prajwal/fornaxscript.git -b test
 
 ### 3. Edit the IP's in all the three scripts:
-        export a= (IP address of node-a)
-        export b= (IP address of node-b)
-        export c= (IP address of node-c)
+       export a= (IP address of node-a)
+       export b= (IP address of node-b)
+       export c= (IP address of node-c)
 
 ### 4. Run the Scripts:
        sudo bash fornaxscript/fornax1.sh (for node-a)
@@ -20,6 +20,7 @@
   
 ### 5. Verify the Edgecluster in Node-A:
        kubectl get edgecluster
+       
 ### 6. To see Cloudcore & Edgecore logs:
        cd /root/go/src/github.com/kubeedge
        cat cloudcore.logs
