@@ -9,7 +9,7 @@ export a=192.168.2.50
 export b=192.168.2.51
 export c=192.168.2.52
 
-scp -r /root/fornaxscript/fornax2.sh $b:/root
+#scp -r /root/fornaxscript/fornax2.sh $b:/root
 #scp -r /root/fornaxscript/fornax3.sh $c:/root
 pushd /root  
 hostnamectl set-hostname node-a
@@ -61,7 +61,7 @@ git clone https://github.com/CentaurusInfra/fornax.git
          mkdir /etc/kubeedge/config -p
          cp /etc/kubernetes/admin.conf /root/.kube/config
          _output/local/bin/cloudcore --minconfig > /etc/kubeedge/config/cloudcore.yaml
-	     sed -i 's+RANDFILE+#RANDFILE+g' /etc/ssl/openssl.cnf
+	 sed -i 's+RANDFILE+#RANDFILE+g' /etc/ssl/openssl.cnf
          mkdir -p /etc/kubeedge/ca
          mkdir -p /etc/kubeedge/certs
          build/tools/certgen.sh genCA $a $b $c
@@ -84,7 +84,7 @@ git clone https://github.com/CentaurusInfra/fornax.git
 	 export KUBECONFIG=/etc/kubernetes/admin.conf
          nohup _output/local/bin/cloudcore > cloudcore.logs 2>&1 & 
 	 #ssh -t root@$b "mkdir -p /root/go/src/github.com/kubeedge"
-	 echo yes | scp -r /etc/kubernetes/admin.conf $b:/root/go/src/github.com/kubeedge
+	 #echo yes | scp -r /etc/kubernetes/admin.conf $b:/root/go/src/github.com/kubeedge
 	 #ssh -t root@$b "mkdir -p /etc/kubeedge"
          #echo yes | scp -r /etc/kubeedge/certs  $b:/etc/kubeedge
          #echo yes | scp -r /etc/kubeedge/ca $b:/etc/kubeedge
