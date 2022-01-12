@@ -10,8 +10,8 @@ git clone https://github.com/click2cloud-prajwal/fornaxscript.git
 
 ### 3. Run the Script
 #### sudo bash fornaxscript/fornax1.sh 
-(for node-a run the 'fornax1.sh'. Simultaneously run the 'fornax2.sh' for node-b and 'fornax3.sh' for node-c)
+#### (for node-a run the 'fornax1.sh', Simultaneously run the 'fornax2.sh' for node-b and 'fornax3.sh' for node-c)
   
 ### 4. Verify the Edgecluster in Node-A
-kubectl get edgecluster
+#### kubectl get edgecluster
 
