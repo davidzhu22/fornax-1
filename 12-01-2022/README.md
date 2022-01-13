@@ -25,3 +25,5 @@
        cd /root/go/src/github.com/kubeedge
        cat cloudcore.logs
        cat edgecore.logs
+       
+###
