@@ -26,9 +26,8 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
 
 • Configure Kubernetes Repository
      
-       cat <<EOF > /etc/yum.repos.d/kubernetes.repo
-       
-       
+ Create `/etc/yum.repos.d/kubernetes.repo` and paste the below commands:
+ 
        [kubernetes]
        name=Kubernetes
        baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
