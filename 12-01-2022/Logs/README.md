@@ -47,11 +47,6 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
        
 ### 1.2.2. Install Docker Runtime
 
-
-•  Install Docker runtime 
-      
-      sudo yum update -y
-      sudo yum install docker.io -y
   
 • Disable SELinux  
   
@@ -72,6 +67,11 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
       sudo firewall-cmd --permanent --add-port=10252/tcp
       sudo firewall-cmd --permanent --add-port=10255/tcp
       sudo firewall-cmd --reload
+      
+•  Install Docker runtime 
+      
+      sudo yum update -y
+      sudo yum install docker.io -y
       
 ### 1.2.3. Installing kubeadm, kubelet and kubectl
 
