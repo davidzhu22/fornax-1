@@ -48,8 +48,28 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
 
 •  Install Docker runtime 
       
-      sudo apt-get update
-      sudo apt-get install docker.io -y
+      sudo yum update -y
+      sudo yum install docker.io -y
+  
+• Disable SELinux  
+  
+      sudo setenforce 0
+      sudo sed -i ‘s/^SELINUX=enforcing$/SELINUX=permissive/’ /etc/selinux/config
+      
+• Disable swap    
+    
+      sudo sed -i '/swap/d' /etc/fstab
+      sudo swapoff -a
+      
+• Configure Firewall
+
+      sudo firewall-cmd --permanent --add-port=6443/tcp
+      sudo firewall-cmd --permanent --add-port=2379-2380/tcp
+      sudo firewall-cmd --permanent --add-port=10250/tcp
+      sudo firewall-cmd --permanent --add-port=10251/tcp
+      sudo firewall-cmd --permanent --add-port=10252/tcp
+      sudo firewall-cmd --permanent --add-port=10255/tcp
+      sudo firewall-cmd --reload
       
 ### 1.2.3. Installing kubeadm, kubelet and kubectl
 
@@ -65,8 +85,8 @@ You will install these packages on your machine:
 
 i. Update the apt package index and install packages needed to use the Kubernetes apt repository:
     
-      sudo apt-get update
-      sudo apt-get install -y apt-transport-https ca-certificates curl
+      sudo yum update
+      sudo yum install -y apt-transport-https ca-certificates curl
       
 ii. Download the Google Cloud public signing key:
 
@@ -78,9 +98,10 @@ iii. Add the Kubernetes apt repository:
       
 iv. Update apt package index, install kubelet, kubeadm and kubectl, and pin their version:
    
-     sudo apt-get update
-     apt-get install -qy kubelet=1.21.1-00 kubectl=1.21.1-00 kubeadm=1.21.1-00
-     sudo apt-mark hold kubelet kubeadm kubectl
+     sudo yum update
+     yum install -qy kubelet=1.21.1-00 kubectl=1.21.1-00 kubeadm=1.21.1-00
+     systemctl enable kubelet
+     systemctl start kubelet
      
 • Next, run the command to enable docker service **systemctl enable docker.service**
 
@@ -89,11 +110,15 @@ iv. Update apt package index, install kubelet, kubeadm and kubectl, and pin thei
 
 • Run command (it might cost a few minutes)
 
-      kubeadm init
+      sudo kubeadm init --pod-network-cidr=10.244.0.0/16
       
 • At the end of the screen output, you will see info about setting the kubeconfig. Do the following if you are the root user:
 
       export KUBECONFIG=/etc/kubernetes/admin.conf
+      
+• Set Up Pod Network
+   
+      sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
 • Check the cluster is up by running some commands, like
 
