@@ -39,11 +39,10 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
       
 •  Make sure that the br_netfilter module is loaded. This can be done by running lsmod | grep br_netfilter. To load it explicitly call sudo modprobe br_netfilter.
 
-       cat <<EOF > /etc/sysctl.d/k8s.conf
+create `/etc/sysctl.d/k8s.conf` and paste below commands:
+
        net.bridge.bridge-nf-call-ip6tables = 1
        net.bridge.bridge-nf-call-iptables = 1
-       EOF
-       sysctl --system
         
        
 ### 1.2.2. Install Docker Runtime
