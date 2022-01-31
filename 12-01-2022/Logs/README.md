@@ -21,29 +21,11 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
 •      Installing kubeadm, kubelet and kubectl                                                                                   
 
 
-### 1.2.1. Disable SELinux and swap
+### 1.2.1 Installing Docker 
 
-• Disable SELinux
-       setenforce 0
-       sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
-       
-• Disable swap
-       swapoff -a
-      
-      
-• For our next trick, we'll be enabling the br_netfilter kernel module
-        
-        modprobe br_netfilter
-        echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
-       
+Link of commands to [Install Docker](https://phoenixnap.com/kb/how-to-install-docker-centos-7)
 
-### 1.2.2. Install Docker Runtime
-
-        yum install -y yum-utils device-mapper-persistent-data lvm2
-        yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-        yum install -y docker-ce
-      
-### 1.2.3. Installing kubeadm, kubelet and kubectl
+### 1.2.2. Installing kubeadm, kubelet and kubectl
 
 
 You will install these packages on your machine:
@@ -54,25 +36,7 @@ You will install these packages on your machine:
 
 • **kubectl:** the command line util to talk to your cluster.
 
-i. First we need to create a repository entry for yum. To do this, issue the command `vi /etc/yum.repos.d/kubernetes.repo` and then add the following contents:
-       
-       `[kubernetes]
-       name=Kubernetes
-       baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-       enabled=1
-       gpgcheck=1
-       repo_gpgcheck=1
-       gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
-               https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg`
-               
-               
-ii. Save and close that file. Install Kubernetes with the command:
-
-     yum install -y kubelet kubeadm kubectl
-      
-iii. **Once the installation completes, reboot all three machines. As soon as each machine has rebooted, log back in and su to the root user.**
-     
-• Next, run the command to enable docker service **systemctl enable docker.service**
+Link of commands to [Install Kubernetes on CentOS 7](https://phoenixnap.com/kb/how-to-install-kubernetes-on-centos#:~:text=1%20Step%201%3A%20Create%20Cluster%20with%20kubeadm.%20The,options.%204%20Step%204%3A%20Check%20Status%20of%20Cluster) 
 
 ### 1.2.4. Start a cluster using kubeadm
 
@@ -82,6 +46,10 @@ iii. **Once the installation completes, reboot all three machines. As soon as ea
       sudo kubeadm init --pod-network-cidr=10.244.0.0/16
       
 • At the end of the screen output, you will see info about setting the kubeconfig. Do the following if you are the root user:
+
+      mkdir -p $HOME/.kube
+      sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+      sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
       export KUBECONFIG=/etc/kubernetes/admin.conf
       
