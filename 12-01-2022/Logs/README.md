@@ -15,66 +15,33 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
 ## 1.2. Install Kubernetes Tools 
 
 
-•      Install kubernetes tools to virtual machine.                                                                                          
+•      Disable SELinux and Disable swap                                                                                          
 •      Letting iptables see bridged traffic                                                                                       
 •      Install docker runtime                                                                                                        
 •      Installing kubeadm, kubelet and kubectl                                                                                   
 
 
-### 1.2.1. Configure Kubernetes Repository and Letting iptables see bridged traffic
+### 1.2.1. Disable SELinux and swap
 
-
-• Configure Kubernetes Repository
-     
- Create `/etc/yum.repos.d/kubernetes.repo` and paste the below commands:
- 
-       [kubernetes]
-       name=Kubernetes
-       baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-       enabled=1
-       gpgcheck=1
-       repo_gpgcheck=1
-       gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-      
-      
-•  Make sure that the br_netfilter module is loaded. This can be done by running lsmod | grep br_netfilter. To load it explicitly call sudo modprobe br_netfilter.
-
-create `/etc/sysctl.d/k8s.conf` and paste below commands:
-
-       net.bridge.bridge-nf-call-ip6tables = 1
-       net.bridge.bridge-nf-call-iptables = 1
-        
-reload `systemctl`
-   
-       sysctl --system
+• Disable SELinux
+       setenforce 0
+       sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
        
+• Disable swap
+       swapoff -a
+      
+      
+• For our next trick, we'll be enabling the br_netfilter kernel module
+        
+        modprobe br_netfilter
+        echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+       
+
 ### 1.2.2. Install Docker Runtime
 
-  
-• Disable SELinux  
-  
-      sudo setenforce 0
-      sudo sed -i ‘s/^SELINUX=enforcing$/SELINUX=permissive/’ /etc/selinux/config
-      
-• Disable swap    
-    
-      sudo sed -i '/swap/d' /etc/fstab
-      sudo swapoff -a
-      
-• Configure Firewall
-
-      sudo firewall-cmd --permanent --add-port=6443/tcp
-      sudo firewall-cmd --permanent --add-port=2379-2380/tcp
-      sudo firewall-cmd --permanent --add-port=10250/tcp
-      sudo firewall-cmd --permanent --add-port=10251/tcp
-      sudo firewall-cmd --permanent --add-port=10252/tcp
-      sudo firewall-cmd --permanent --add-port=10255/tcp
-      sudo firewall-cmd --reload
-      
-•  Install Docker runtime 
-      
-      sudo yum update -y
-      sudo yum install docker.io -y
+        yum install -y yum-utils device-mapper-persistent-data lvm2
+        yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+        yum install -y docker-ce
       
 ### 1.2.3. Installing kubeadm, kubelet and kubectl
 
@@ -87,26 +54,23 @@ You will install these packages on your machine:
 
 • **kubectl:** the command line util to talk to your cluster.
 
+i. First we need to create a repository entry for yum. To do this, issue the command `vi /etc/yum.repos.d/kubernetes.repo` and then add the following contents:
+       
+       `[kubernetes]
+       name=Kubernetes
+       baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+       enabled=1
+       gpgcheck=1
+       repo_gpgcheck=1
+       gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+               https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg`
+               
+               
+ii. Save and close that file. Install Kubernetes with the command:
 
-i. Update the apt package index and install packages needed to use the Kubernetes apt repository:
-    
-      sudo yum update
-      sudo yum install -y apt-transport-https ca-certificates curl
+     yum install -y kubelet kubeadm kubectl
       
-ii. Download the Google Cloud public signing key:
-
-      sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-      
-iii. Add the Kubernetes apt repository:
-
-      echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-      
-iv. Update apt package index, install kubelet, kubeadm and kubectl, and pin their version:
-   
-     sudo yum update
-     yum install -qy kubelet=1.21.1-00 kubectl=1.21.1-00 kubeadm=1.21.1-00
-     systemctl enable kubelet
-     systemctl start kubelet
+iii. **Once the installation completes, reboot all three machines. As soon as each machine has rebooted, log back in and su to the root user.**
      
 • Next, run the command to enable docker service **systemctl enable docker.service**
 
