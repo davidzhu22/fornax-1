@@ -5,9 +5,9 @@ c#! /bin/bash
 
 set -x
 
-export a=172.31.9.25
-export b=172.31.13.204
-export c=172.31.8.52
+export a=172.31.8.98
+export b=172.31.7.3
+export c=172.31.7.254
 
 pushd /root
 hostnamectl set-hostname node-b

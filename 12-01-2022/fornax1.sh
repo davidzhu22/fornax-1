@@ -5,9 +5,9 @@
 
 set -x
 
-export a=172.31.9.25
-export b=172.31.13.204
-export c=172.31.8.52
+export a=172.31.8.98
+export b=172.31.7.3
+export c=172.31.7.254
 
 #scp -r /root/fornaxscript/fornax2.sh $b:/root
 #scp -r /root/fornaxscript/fornax3.sh $c:/root
@@ -67,7 +67,7 @@ git clone https://github.com/CentaurusInfra/fornax.git
          build/tools/certgen.sh genCA $a $b $c
          build/tools/certgen.sh genCertAndKey server $a $b $c
          #ssh -t root@$2 "mkdir -p /etc/kubeedge/ca /etc/kubeedge/certs"
-         #ssh  -t root@$3 "mkdir -p /etc/kubeedge/ca /etc/kubeedge/certs"
+         #ssh -t root@$3 "mkdir -p /etc/kubeedge/ca /etc/kubeedge/certs"
          #ssh -t root@$i "scp -r /etc/kubeedge/ca root@$2:/etc/kubeedge/"
          #ssh -t root@$i "scp -r /etc/kubeedge/ca root@$3:/etc/kubeedge/"
          #ssh -t root@$i "scp -r /etc/kubeedge/certs root@$2:/etc/kubeedge/"

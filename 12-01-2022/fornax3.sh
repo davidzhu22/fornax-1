@@ -5,8 +5,8 @@
 
 set -x
 
-export b=172.31.13.204
-export c=172.31.8.52
+export b=172.31.7.3
+export c=172.31.7.254
 
 pushd /root   
 hostnamectl set-hostname node-c
