@@ -69,7 +69,13 @@ Link of commands to [Install Kubernetes on CentOS 7](https://phoenixnap.com/kb/h
 
       kubectl get nodes
       
+### Clone the Deployment YAML's
+  
+       git clone 
+       
+### Apply the YAML's for deployment:
 
+      
  
  
 
