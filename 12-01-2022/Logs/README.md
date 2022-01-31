@@ -12,66 +12,59 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
 •      ` Centos 7 `                                                                                                                              
 •      ` 8 vCPUs, 16 GB RAM and 200 GB Storage `                                                                
 
-## 1.2. Install Kubernetes Tools 
+### 1. Installing Kubernetes using Kubespray: 
+                                                                                   
+       yum upgrade -y
+       git clone 
+       yum install epel-release -y
+       
+### 1.1 Generate ssh-key:
 
+**Edit the ssh file and uncomments the below parameters**
 
-•      Disable SELinux and Disable swap                                                                                          
-•      Letting iptables see bridged traffic                                                                                       
-•      Install docker runtime                                                                                                        
-•      Installing kubeadm, kubelet and kubectl                                                                                   
+       vi /etc/ssh/sshd_config
+       
+`Uncomment the #PermitRootLogin yes`
+`Uncomment the  #PasswordAuthentication yes`
 
+**Now generate the key**
 
-### 1.2.1 Installing Docker 
+       ssh-keygen
+       ssh-copy-id `Enter IP address of Machine`
+  
+   ![image](https://user-images.githubusercontent.com/95343388/151780812-01a8cd61-8151-46aa-b42c-c4da611b272e.png)
 
-Link of commands to [Install Docker](https://phoenixnap.com/kb/how-to-install-docker-centos-7)
+       
+**Install the prerequisite packages:**
 
-### 1.2.2. Installing kubeadm, kubelet and kubectl
+       yum install wget openssh* curl wget vim git python-pip -y
 
+       
+### 1.2. Configure Kubespray
 
-You will install these packages on your machine:
+       cd kubespray
+       sudo pip3 install -r requirements.txt
+       cp -rfp inventory/sample inventory/mycluster
 
-• **kubeadm:** the command to bootstrap the cluster.
+**Update your inventory/mycluster/inventry.ini with VM IP Address file **
 
-• **kubelet:** the component that runs on all of the machines in your cluster and does things like starting pods and containers.
-
-• **kubectl:** the command line util to talk to your cluster.
-
-Link of commands to [Install Kubernetes on CentOS 7](https://phoenixnap.com/kb/how-to-install-kubernetes-on-centos#:~:text=1%20Step%201%3A%20Create%20Cluster%20with%20kubeadm.%20The,options.%204%20Step%204%3A%20Check%20Status%20of%20Cluster) 
-
-• **Make a host entry or DNS record to resolve the hostname for all node:**
-
-     vi /etc/hosts
-     
-• With the entry:
-     
-     192.168.xx.xx  master-node
-
-### 1.2.3. Start a cluster using kubeadm
-
-
-• Run command (it might cost a few minutes)
-
-      sudo kubeadm init --pod-network-cidr=10.244.0.0/16
-      
-• At the end of the screen output, you will see info about setting the kubeconfig. Do the following if you are the root user:
-
-      mkdir -p $HOME/.kube
-      sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-      sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-      export KUBECONFIG=/etc/kubernetes/admin.conf
-      
-• Set Up Pod Network
+       vi inventory/mycluster/inventory.ini
+       
+   ![image](https://user-images.githubusercontent.com/95343388/151781654-6be45601-e6f2-4b82-b968-81e3c5fb880e.png)
    
-      sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+   
+
+###  Deploy Kubespray with Ansible Playbook - run the playbook as root:
+  
+      ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
+
 
 • Check the cluster is up by running some commands, like
 
       kubectl get nodes
       
 ### Clone the Deployment YAML's
-  
-       git clone 
+
        
 ### Apply the YAML's for deployment:
 
