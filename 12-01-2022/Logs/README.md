@@ -46,7 +46,7 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
        sudo pip3 install -r requirements.txt
        cp -rfp inventory/sample inventory/mycluster
 
-**Update your inventory/mycluster/inventry.ini with VM IP Address file **
+**Update your inventory/mycluster/inventry.ini with VM IP Address file**
 
        vi inventory/mycluster/inventory.ini
        
