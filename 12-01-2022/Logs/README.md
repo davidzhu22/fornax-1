@@ -38,7 +38,7 @@ You will install these packages on your machine:
 
 Link of commands to [Install Kubernetes on CentOS 7](https://phoenixnap.com/kb/how-to-install-kubernetes-on-centos#:~:text=1%20Step%201%3A%20Create%20Cluster%20with%20kubeadm.%20The,options.%204%20Step%204%3A%20Check%20Status%20of%20Cluster) 
 
-### 1.2.4. Start a cluster using kubeadm
+### 1.2.3. Start a cluster using kubeadm
 
 
 • Run command (it might cost a few minutes)
