@@ -17,6 +17,7 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
        yum upgrade -y
        git clone 
        yum install epel-release -y
+       sudo yum install ansible
        
 ### 1.1 Generate ssh-key:
 
