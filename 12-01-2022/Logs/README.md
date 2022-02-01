@@ -6,7 +6,7 @@
 
 The purpose of this document is to setup and configure the **Cloud Intel** on single virtual machine. Cloud Intel is an assessment tool that identifies your IT inventory and evaluates it to make you decide the movement of your workloads to Cloud. 
 
-## 1.1. Virtual Machine Configuration
+##  Virtual Machine Configuration
 
 
 •      ` Centos 7 `                                                                                                                              
@@ -19,7 +19,7 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
        yum install epel-release -y
        sudo yum install ansible
        
-### 1.1 Generate ssh-key:
+### 2. Generate ssh-key:
 
 **Edit the ssh file and uncomments the below parameters**
 
@@ -43,7 +43,7 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
        yum install wget openssh* curl wget vim git python-pip -y
 
        
-### 1.2. Configure Kubespray
+### 3. Configure Kubespray
 
        cd kubespray
        sudo pip3 install -r requirements.txt
@@ -56,8 +56,13 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
    ![image](https://user-images.githubusercontent.com/95343388/151781654-6be45601-e6f2-4b82-b968-81e3c5fb880e.png)
    
    
+**Declare the IP Address:**
 
-###  Deploy Kubespray with Ansible Playbook - run the playbook as root:
+       declare -a IPS=(**IP ADDRESS**)
+       CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
+       
+      
+### 4. Deploy Kubespray with Ansible Playbook - run the playbook as root:
   
       ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
 
@@ -65,11 +70,9 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
 • Check the cluster is up by running some commands, like
 
       kubectl get nodes
-      
-### Clone the Deployment YAML's
 
        
-### Apply the YAML's for deployment:
+### 5. Apply the YAML's for deployment:
 
       
  
