@@ -15,7 +15,7 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
 ### 1. Installing Kubernetes using Kubespray: 
                                                                                    
        yum upgrade -y
-       git clone 
+       git clone https://github.com/Click2Cloud/cb-deployment-assets.git
        yum install epel-release -y
        sudo yum install ansible
        
@@ -45,7 +45,7 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
        
 ### 3. Configure Kubespray
 
-       cd kubespray
+       cd cb-deployment-assets/cloudintel_single_vm_deployment/kubespray
        sudo pip3 install -r requirements.txt
        cp -rfp inventory/sample inventory/mycluster
 
@@ -74,7 +74,20 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
        
 ### 5. Apply the YAML's for deployment:
 
+      cd /root/cb-deployment-assets/cloudintel_single_vm_deployment/client_Deployment/cloudintel_prod_client
+      kubectl apply -f 00-namespace.yml
+      kubectl apply -f 02-configmaps.yml
+      kubectl apply -f 02-secrets.yml
+      kubectl apply -f 04-ci-app.yml
+      kubectl apply -f 04-ci-node.yml
+      kubectl apply -f 04-ci-python-api.yml
       
- 
+**Similarly apply**
+   
+      cd /root/cb-deployment-assets/cloudintel_single_vm_deployment/client_Deployment/wiui_client/prod
+      kubectl apply -f 01-namespace.yml
+      kubectl apply -Rf configmap-secrets/*
+      kubectl apply -Rf pv-pvc/*
+      kubectl apply -Rf deployments-services/*
  
 
