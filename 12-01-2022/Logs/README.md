@@ -27,6 +27,8 @@ The purpose of this document is to setup and configure the **Cloud Intel** on si
 `Uncomment the #PermitRootLogin yes`
 `Uncomment the  #PasswordAuthentication yes`
 
+       systemctl reload sshd
+
 **Now generate the key**
 
        ssh-keygen
